@@ -1,0 +1,9 @@
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Felix','Nuñez','felixjavier0@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Juan','Madrid','juan23@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Alberto','Acosta','albert33@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Miriam','Ledezma','miriam33@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('María','Duarte','maria_a@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Fernanda','Avalos','fernanda_cr@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Patricia','Martinez','patricia_ma@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Uriel','Peña','urielp@gmail.com', NOW());
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Julian','Bañuelos','julianb@gmail.com', NOW());
