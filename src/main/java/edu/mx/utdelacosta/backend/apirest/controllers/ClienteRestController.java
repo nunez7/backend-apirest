@@ -3,11 +3,15 @@ package edu.mx.utdelacosta.backend.apirest.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mx.utdelacosta.backend.apirest.models.entity.Cliente;
@@ -60,8 +63,22 @@ public class ClienteRestController {
 	}
 
 	@PostMapping("/clientes")
-	public ResponseEntity<?> create(@RequestBody Cliente cliente) {
+	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 		Cliente clienteNew = null;
+		
+		if(result.hasErrors()) {
+			/*List<String> errors = new ArrayList<String>();
+			for (FieldError err : result.getFieldErrors()) {
+				errors.add("El campo "+err.getField()+"  " +err.getDefaultMessage());
+			}*/
+			List<String>  errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo "+err.getField()+" " +err.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("error", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
 		try {
 			clienteNew = clienteService.save(cliente);
 		} catch (DataAccessException e) {
@@ -76,8 +93,17 @@ public class ClienteRestController {
 	}
 
 	@PutMapping("/clientes/{id}")
-	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Long id) {
+	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 		Cliente clienteActual = clienteService.findById(id);
+		
+		if(result.hasErrors()) {
+			List<String>  errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo "+err.getField()+" " +err.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("error", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
 
 		if (cliente == null) {
 			response.put("mensaje", "Error: no se puede editar, el cliente con el ID: "
