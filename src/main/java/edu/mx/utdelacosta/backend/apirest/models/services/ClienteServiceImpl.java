@@ -3,6 +3,8 @@ package edu.mx.utdelacosta.backend.apirest.models.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,13 @@ public class ClienteServiceImpl implements IClienteService{
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
 		return (List<Cliente>) clienteRepository.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Cliente> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return clienteRepository.findAll(pageable);
 	}
 
 	@Transactional(readOnly = true)
