@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -47,6 +49,8 @@ public class ClienteRestController {
 	private IClienteService clienteService;
 
 	private Map<String, Object> response = new HashMap<>();
+	
+	private final Logger log = LoggerFactory.getLogger(ClienteRestController.class);
 
 	@GetMapping("/clientes")
 	public List<Cliente> index() {
@@ -180,6 +184,7 @@ public class ClienteRestController {
 		if(!archivo.isEmpty()) {
 			String nombreArchivo = UUID.randomUUID().toString()+"_"+ archivo.getOriginalFilename().replace(" ", "");
 			Path rutaArvhivo = Paths.get("C:/spring5/temp").resolve(nombreArchivo).toAbsolutePath();
+			log.info("Ruta de archivo"+rutaArvhivo.toString());
 			try {
 				Files.copy(archivo.getInputStream(), rutaArvhivo);
 			} catch (Exception e) {
@@ -212,7 +217,7 @@ public class ClienteRestController {
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto){
 		Path rutaArchivo = Paths.get("C:/spring5/temp").resolve(nombreFoto).toAbsolutePath();
 		Resource recurso = null;
-		
+		log.info("Ruta de archivo"+nombreFoto);
 		try {
 			recurso = new UrlResource(rutaArchivo.toUri());
 			
