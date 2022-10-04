@@ -220,18 +220,24 @@ public class ClienteRestController {
 		log.info("Ruta de archivo"+nombreFoto);
 		try {
 			recurso = new UrlResource(rutaArchivo.toUri());
-			
 		} catch (MalformedURLException e) {
 			
 		}
 		
 		if(!recurso.exists() && !recurso.isReadable()) {
-			throw new RuntimeException("No se pudo cargar la imagen: "+nombreFoto);
+			//Agregamos la ruta por default si llegan a eliminar la imagen
+			rutaArchivo = Paths.get("src/main/resources/static/img").resolve("not_user_icon.png").toAbsolutePath();
+			try {
+				recurso = new UrlResource(rutaArchivo.toUri());
+			} catch (MalformedURLException e) {
+				
+			}
+			log.error("No se pudo cargar la imagen: "+nombreFoto);
+			//throw new RuntimeException("No se pudo cargar la imagen: "+nombreFoto);
 		}
 		//Forza la descarga
 		HttpHeaders cabecera = new HttpHeaders();
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+recurso.getFilename()+"\"");
-		
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
 	}
 
