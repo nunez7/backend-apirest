@@ -19,7 +19,7 @@ import edu.mx.utdelacosta.backend.apirest.models.dao.IUsuarioDao;
 import edu.mx.utdelacosta.backend.apirest.models.entity.Usuario;
 
 @Service
-public class UsuarioService implements UserDetailsService{
+public class UsuarioService implements UserDetailsService, IUsuarioService{
 	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 	
 	@Autowired
@@ -40,6 +40,12 @@ public class UsuarioService implements UserDetailsService{
 				.collect(Collectors.toList());
 		
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,  authorities);
+	}
+
+	@Override
+	public Usuario findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findByUsername(username);
 	}
 
 }
