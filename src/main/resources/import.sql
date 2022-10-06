@@ -14,8 +14,8 @@ INSERT INTO clientes (region_id, nombre, apellido, email, create_at) VALUES(2, '
 INSERT INTO clientes (region_id, nombre, apellido, email, create_at) VALUES(3, 'Uriel','Peña','urielp@gmail.com', NOW());
 INSERT INTO clientes (region_id, nombre, apellido, email, create_at) VALUES(4, 'Julian','Bañuelos','julianb@gmail.com', NOW());
 --DEL 1 al 5--
-INSERT INTO usuarios(username, password, enabled) VALUES('felix', '$2a$10$4geeA9LtqH7nAbYhW9MEQedWRgNhRBxXyBcydEFjrDDCwz.GK3fa6', 'True');
-INSERT INTO usuarios(username, password, enabled) VALUES('admin', '$2a$10$0GeY3kP15C4zOl3B6FcfXe2rStMYZ4lIVxfS.Jf.PK56N8QBZTarC', 'True');
+INSERT INTO usuarios(username, password, enabled, nombre, apellido, email) VALUES('felix', '$2a$10$4geeA9LtqH7nAbYhW9MEQedWRgNhRBxXyBcydEFjrDDCwz.GK3fa6', 'True', 'Felix Javier', 'Nuñez Gonzalez', 'felixjavier0@gmail.com');
+INSERT INTO usuarios(username, password, enabled, nombre, apellido, email) VALUES('admin', '$2a$10$0GeY3kP15C4zOl3B6FcfXe2rStMYZ4lIVxfS.Jf.PK56N8QBZTarC', 'True', 'Andres', 'Guzman', 'profesor.andres@gmail.com');
 
 INSERT INTO roles(nombre) VALUES('ROLE_USER');
 INSERT INTO roles(nombre) VALUES('ROLE_ADMIN');
