@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Cliente implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotEmpty(message = "No puede estar vacío")
@@ -59,6 +59,7 @@ public class Cliente implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Region region;
 	
+	@JsonIgnoreProperties({"cliente", "hibernateLazyInitializer", "handler"})
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Factura> facturas;
 

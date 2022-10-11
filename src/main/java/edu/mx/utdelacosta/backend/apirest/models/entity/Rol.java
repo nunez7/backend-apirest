@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Rol implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(unique = true, length = 20)

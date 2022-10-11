@@ -20,12 +20,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "facturas")
 public class Factura implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String descripcion;
@@ -36,10 +38,13 @@ public class Factura implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 
+	@JsonIgnoreProperties({"facturas", "hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
+
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_factura") // Llave que se crea en ItemFactura
 	private List<ItemFactura> items;

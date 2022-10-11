@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 public class Usuario implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(unique = true, length = 20)
