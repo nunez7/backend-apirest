@@ -1,24 +1,35 @@
 package edu.mx.utdelacosta.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "roles")
-public class Rol implements Serializable {
+@Table(name = "productos")
+public class Producto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@Column(unique = true, length = 20)
 	private String nombre;
+
+	private Double precio;
+
+	@Column(name = "create_at")
+	private Date createAt;
+	
+	@PrePersist
+	public void prePersist() {
+		this.createAt = new Date();
+	}
 
 	public Long getId() {
 		return id;
@@ -34,6 +45,22 @@ public class Rol implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 
 	/**
