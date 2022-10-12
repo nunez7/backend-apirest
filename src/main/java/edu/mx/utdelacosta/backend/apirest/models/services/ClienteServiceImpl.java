@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mx.utdelacosta.backend.apirest.models.dao.IClienteDao;
 import edu.mx.utdelacosta.backend.apirest.models.dao.IFacturaDao;
+import edu.mx.utdelacosta.backend.apirest.models.dao.IProductoDao;
 import edu.mx.utdelacosta.backend.apirest.models.entity.Cliente;
 import edu.mx.utdelacosta.backend.apirest.models.entity.Factura;
+import edu.mx.utdelacosta.backend.apirest.models.entity.Producto;
 import edu.mx.utdelacosta.backend.apirest.models.entity.Region;
 
 @Service
@@ -22,6 +24,9 @@ public class ClienteServiceImpl implements IClienteService{
 	
 	@Autowired
 	private IFacturaDao facturaRepository;
+	
+	@Autowired
+	private IProductoDao productoRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -80,6 +85,13 @@ public class ClienteServiceImpl implements IClienteService{
 	@Transactional
 	public void deleteFactura(Long id) {
 		facturaRepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> findProductoByNombre(String term) {
+		// TODO Auto-generated method stub
+		return productoRepository.findByNombreContainingIgnoreCase(term);
 	}
 
 }
