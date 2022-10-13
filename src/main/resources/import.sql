@@ -23,3 +23,13 @@ INSERT INTO roles(nombre) VALUES('ROLE_ADMIN');
 INSERT INTO usuarios_roles(id_usuario, id_rol) VALUES(1,1);
 INSERT INTO usuarios_roles(id_usuario, id_rol) VALUES(2,1);
 INSERT INTO usuarios_roles(id_usuario, id_rol) VALUES(2,2);
+
+INSERT INTO productos(nombre, precio, create_at) VALUES('Sillón Gamer', 4000, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES('Apple iPhone 11', 9000, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES('Sony Camara', 7000, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES('Huawei Notebook', 6000, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES('Cafetera', 2000, NOW());
+
+INSERT INTO facturas(descripcion, observacion, id_cliente, create_at) VALUES('Factura de prueba', null, 1, NOW());
+INSERT INTO facturas_items(cantidad, id_factura, id_producto) VALUES(1,1,1);
+INSERT INTO facturas_items(cantidad, id_factura, id_producto) VALUES(2,1,4);
